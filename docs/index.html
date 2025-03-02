@@ -29,9 +29,9 @@
 </head>
 <body ng-controller="controller" class="markdown-body">
 
-  <h2 ng-repeat-start="post in feed">{{ post.title }}</h2>
-  <p ng-repeat-end>
-    <a href="{{ post.link }}"><img src="{{ post.preview }}" alt="{{ post.title }}" style="max-width: 100%;"></a>
+  <h2 ng-cloak ng-repeat-start="post in feed">{{ post.title }}</h2>
+  <p ng-cloak ng-repeat-end>
+    <a href="{{ post.link }}"><img ng-src="{{ post.preview }}" alt="{{ post.title }}" style="max-width: 100%;"></a>
   </p>
 
   <span id="bottom"></span>
