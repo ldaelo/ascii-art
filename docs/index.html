@@ -8,13 +8,12 @@
 <style>
   body {
     background: #000;
-    color: #ababab;
+    color: #fff;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    min-height: 636px;
-    margin: 162px 45px 26px 45px;
+    min-height: 635px;
+    margin: 70px 45px 26px;
     background-image:
       url("assets/frame-divider.png"),
-      url("assets/lana del rey.png"),
       url("assets/frame-left-border.png"),
       url("assets/frame-right-border.png"),
       url("assets/frame-bottom-left-corner.png"),
@@ -24,28 +23,65 @@
       no-repeat,
       no-repeat,
       no-repeat,
-      no-repeat,
       no-repeat;
     background-position:
-      center 110px,
-      center 8px,
+      top center,
       center left,
       center right,
       bottom left,
       bottom right;
     background-size:
       auto 44px,
-      auto 136px,
       180px auto,
       180px auto,
       180px auto,
       180px auto;
   }
+  .feed h1 {
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .preview {
+    border: 2px dotted #ccc;
+    position: relative;
+  }
+  .preview img {
+    width: 100%;
+  }
+  .preview figcaption {
+    width: 100%;
+    background: #000;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+  .preview figcaption h2 {
+    padding: 0 8px;
+    text-align: center;
+  }
 </style>
 </head>
 <body>
 <main>
-<h1>hello world</h1>
+<section class="feed">
+<h1>Pinned</h1>
+<figure class="preview">
+  <img src="assets/previews/Lana Del Rey-Zpmn.jpeg">
+  <figcaption>
+    <h2>Lana Del Rey</h2>
+  </figcaption>
+</figure>
+</section>
+<section class="feed">
+<h1>Recent</h1>
+<figure class="preview">
+  <img src="assets/previews/Lana Del Rey-Zpmn.jpeg">
+  <figcaption>
+    <h2>Lana Del Rey</h2>
+  </figcaption>
+</figure>
+</section>
 </main>
 </body>
 </html>
