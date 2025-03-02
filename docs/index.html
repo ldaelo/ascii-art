@@ -1,12 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="app" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
-    <meta http-equiv="refresh" content="0;url=https://github.com/ldaelo/ascii-art">
+  <title>ascii art by ldaelo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/github-markdown.css">
+  <style>
+    .markdown-body {
+      box-sizing: border-box;
+      min-width: 200px;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 45px;
+    }
+
+    @media (max-width: 767px) {
+      .markdown-body {
+        padding: 15px;
+      }
+    }
+
+    .markdown-body {
+      max-width: none;
+      margin: 0;
+    }
+  </style>
+  <script src="assets/angular.min.js"></script>
 </head>
-<body>
-    <p>If you are not redirected, <a href="https://github.com/ldaelo/ascii-art">click here</a>.</p>
+<body ng-controller="controller" class="markdown-body">
+
+  <h2 ng-repeat-start="post in feed">{{ post.title }}</h2>
+  <p ng-repeat-end>
+    <a href="{{ post.link }}"><img src="{{ post.preview }}" alt="{{ post.title }}" style="max-width: 100%;"></a>
+  </p>
+
+  <span id="bottom"></span>
+  <script>
+    {
+      const app = angular.module("app", []);
+      app.controller("controller", function ($scope, $http) {
+
+        $scope.feed = [];
+
+        $http.get("feed.json").then(data => {
+
+          (new IntersectionObserver(entries => {
+
+            if (!entries[0].isIntersecting) return;
+
+            $scope.$apply(() => $scope.feed.push(...data.data.slice($scope.feed.length, Math.min($scope.feed.length + 20, data.data.length))));
+
+          }, { threshold: 1.0 })).observe(document.getElementById("bottom"));
+
+        });
+
+      });
+    }
+  </script>
 </body>
 </html>
