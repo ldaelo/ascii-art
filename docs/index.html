@@ -26,12 +26,18 @@
     }
   </style>
   <script src="assets/angular.min.js"></script>
+  <script>
+    function previewfallback(im) {
+      im.onerror = null;
+      im.src = "previews/no-preview.webp";
+    }
+  </script>
 </head>
 <body ng-controller="controller" class="markdown-body">
 
   <h2 ng-cloak ng-repeat-start="post in feed">{{ post.title }}</h2>
   <p ng-cloak ng-repeat-end>
-    <a href="{{ post.link }}"><img ng-src="{{ post.preview }}" alt="{{ post.title }}" style="max-width: 100%;"></a>
+    <a href="{{ post.link }}"><img ng-src="{{ post.preview }}" onerror="previewfallback(this)" alt="{{ post.title }}" style="max-width: 100%;"></a>
   </p>
 
   <span id="bottom"></span>
@@ -39,21 +45,13 @@
     {
       const app = angular.module("app", []);
       app.controller("controller", function ($scope, $http) {
-
         $scope.feed = [];
-
         $http.get("feed.json").then(data => {
-
           (new IntersectionObserver(entries => {
-
             if (!entries[0].isIntersecting) return;
-
             $scope.$apply(() => $scope.feed.push(...data.data.slice($scope.feed.length, Math.min($scope.feed.length + 20, data.data.length))));
-
           }, { threshold: 1.0 })).observe(document.getElementById("bottom"));
-
         });
-
       });
     }
   </script>
