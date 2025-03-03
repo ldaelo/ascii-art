@@ -20,8 +20,8 @@
       }
     }
 
-    .markdown-body {
-      max-width: none;
+    body {
+      background-color: var(--bgColor-default);
       margin: 0;
     }
   </style>
@@ -33,12 +33,15 @@
     }
   </script>
 </head>
-<body ng-controller="controller" class="markdown-body">
+<body ng-controller="controller">
 
-  <h2 ng-cloak ng-repeat-start="post in feed">{{ post.title }}</h2>
-  <p ng-cloak ng-repeat-end>
-    <a href="{{ post.link }}"><img ng-src="{{ post.preview }}" onerror="previewfallback(this)" alt="{{ post.title }}" style="max-width: 100%;"></a>
-  </p>
+  <article class="markdown-body">
+
+    <h2 ng-cloak ng-repeat-start="post in feed">{{ post.title }}</h2>
+    <p ng-cloak ng-repeat-end>
+      <a href="{{ post.link }}"><img ng-src="{{ post.preview }}" onerror="previewfallback(this)" alt="{{ post.title }}" style="max-width: 100%;"></a>
+    </p>
+  </article>
 
   <span id="bottom"></span>
   <script>
