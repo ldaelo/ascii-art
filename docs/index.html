@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html ng-app="app" lang="en">
 <head>
-  <title>ascii art by ldaelo</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ascii art by ldaelo</title>
   <link rel="stylesheet" href="assets/github-markdown.css">
   <style>
     .markdown-body {
@@ -35,28 +38,26 @@
 </head>
 <body ng-controller="controller">
 
-  <article class="markdown-body">
-
-    <h2 ng-cloak ng-repeat-start="post in feed">{{ post.title }}</h2>
-    <p ng-cloak ng-repeat-end>
+  <article class="ng-cloak markdown-body">
+    <h2 ng-repeat-start="post in feed">{{ post.title }}</h2>
+    <p ng-repeat-end>
       <a href="{{ post.link }}"><img ng-src="{{ post.preview }}" onerror="previewfallback(this)" alt="{{ post.title }}" style="max-width: 100%;"></a>
     </p>
   </article>
 
   <span id="bottom"></span>
+
   <script>
-    {
-      const app = angular.module("app", []);
-      app.controller("controller", function ($scope, $http) {
-        $scope.feed = [];
-        $http.get("feed.json").then(data => {
-          (new IntersectionObserver(entries => {
-            if (!entries[0].isIntersecting) return;
-            $scope.$apply(() => $scope.feed.push(...data.data.slice($scope.feed.length, Math.min($scope.feed.length + 20, data.data.length))));
-          }, { threshold: 1.0 })).observe(document.getElementById("bottom"));
-        });
+    angular.module("app", []).controller("controller", function ($scope, $http) {
+      $scope.feed = [];
+      $http.get("feed.json").then(data => {
+        (new IntersectionObserver(entries => {
+          if (!entries[0].isIntersecting) return;
+          $scope.$apply(() => $scope.feed.push(...data.data.slice($scope.feed.length, Math.min($scope.feed.length + 20, data.data.length))));
+        }, { threshold: 1.0 })).observe(document.getElementById("bottom"));
       });
-    }
+    });
   </script>
+
 </body>
 </html>
