@@ -34,6 +34,10 @@
       }
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       background-color: var(--bgColor-default);
       margin: 0;
@@ -51,6 +55,44 @@
 <body ng-controller="controller">
 
   <article class="ng-cloak markdown-body">
+    <p>
+      [<a href="#feed">Skip to Feed</a>]
+    </p>
+    <h1>The ‘can I make you an art’ guy on TikTok</h1>
+    <p>
+      If you want one too, just message me on TikToK <a href="https://www.tiktok.com/@aelo.1" rel="nofollow">@aelo.1</a> &#x1f970;
+    </p>
+    <p>
+      <a href="https://www.tiktok.com/@aelo.1" rel="nofollow"><img src="assets/tiktoksearch.webp" alt="tiktok search" style="max-width: 100%;"></a>
+    </p>
+    <p>
+      It's <strong>free</strong>
+    </p>
+    <h2>What I do</h2>
+    <p>
+      I simply turn photos into text. Like everything you see on your keyboard—letters, numbers, and symbols—is utilized to form images. This is called, ‘ASCII art’.
+    </p>
+    <p>
+      <a target="_blank" rel="noopener noreferrer" href="assets/lanadelrey.gif"><img src="assets/lanadelrey.gif" alt="lana del rey" style="max-width: 100%;"></a>
+    </p>
+    <p>
+      I started doing this since late 2024, and my very first art, which include some animated ones, were posted on my TikTok.
+    </p>
+    <p>
+      <a target="_blank" rel="noopener noreferrer" href="assets/lanadelrey_animated.gif"><img src="assets/lanadelrey_animated.gif" alt="lana del rey (animated)" style="max-width: 100%;"></a>
+    </p>
+    <blockquote>
+      <p>
+        Lana Del Rey (animated + colorized)
+      </p>
+    </blockquote>
+    <h2>Disclaimer</h2>
+    <ul>
+      <li>None of my works was made with AI</li>
+      <li>This site is non-commercial</li>
+      <li>I use my own software</li>
+    </ul>
+    <h1 id="feed">Feed</h1>
     <h2 ng-repeat-start="post in feed">{{ post.title }}</h2>
     <p ng-repeat-end>
       <a href="{{ post.link }}"><img ng-src="{{ post.preview }}" onerror="previewfallback(this)" alt="{{ post.title }}" style="max-width: 100%;"></a>
