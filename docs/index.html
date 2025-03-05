@@ -97,7 +97,10 @@
     <p ng-repeat-end>
       <a href="{{ post.link }}"><img ng-src="{{ post.preview }}" onerror="previewfallback(this)" alt="{{ post.title }}" style="max-width: 100%;"></a>
     </p>
-    <p id="bottom">
+    <p ng-if="remaining" id="loading">
+      Loading...
+    </p>
+    <p ng-hide="remaining">
       [<a href="#top">Back to Top</a>]
     </p>
   </article>
@@ -105,11 +108,22 @@
   <script>
     angular.module("app", []).controller("controller", function ($scope, $http) {
       $scope.feed = [];
+      $scope.remaining = true;
       $http.get("feed.json").then(data => {
+        function load() {
+          $scope.$apply(() => {
+            $scope.feed.push(...data.data.slice($scope.feed.length, Math.min($scope.feed.length + 20, data.data.length)));
+            $scope.remaining = data.data.length - $scope.feed.length;
+          });
+        }
+        load();
         (new IntersectionObserver(entries => {
           if (!entries[0].isIntersecting) return;
-          $scope.$apply(() => $scope.feed.push(...data.data.slice($scope.feed.length, Math.min($scope.feed.length + 20, data.data.length))));
-        }, { threshold: 1.0 })).observe(document.getElementById("bottom"));
+          load();
+        }, { threshold: 1.0 })).observe(document.getElementById("loading"));
+      }).catch(() => {
+        $scope.remaining = false;
+        alert("Unable to load posts");
       });
     });
   </script>
