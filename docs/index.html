@@ -111,10 +111,8 @@
       $scope.remaining = true;
       $http.get("feed.json").then(data => {
         function load() {
-          $scope.$apply(() => {
-            $scope.feed.push(...data.data.slice($scope.feed.length, Math.min($scope.feed.length + 20, data.data.length)));
-            $scope.remaining = data.data.length - $scope.feed.length;
-          });
+          $scope.feed.push(...data.data.slice($scope.feed.length, Math.min($scope.feed.length + 20, data.data.length)));
+          $scope.remaining = data.data.length - $scope.feed.length;
         }
         load();
         (new IntersectionObserver(entries => {
