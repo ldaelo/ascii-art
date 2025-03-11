@@ -1,4 +1,11 @@
 
+@font-face {
+	font-family: ascii-art;
+	src: url("DroidSansMono.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont,"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   background: #000;
@@ -10,6 +17,10 @@ a {
 
 body, a {
 	color: #fff;
+}
+
+.ascii-art {
+  font-family: ascii-art, monospace;
 }
 
 .license {
